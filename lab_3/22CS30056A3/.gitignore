@@ -1,0 +1,26 @@
+# Compiled binaries and output folders
+# COutput/
+# CppOutput/
+# JavaOutput/
+# pythonOutput/
+
+# Class files
+*.class
+
+# Python cache and environment files
+__pycache__/
+*.py[cod]
+venv/
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Java dependency files
+*.jar

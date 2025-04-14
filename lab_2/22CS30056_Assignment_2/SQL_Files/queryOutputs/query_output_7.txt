@@ -1,0 +1,5 @@
+ total_street_lights 
+---------------------
+                  15
+(1 row)
+

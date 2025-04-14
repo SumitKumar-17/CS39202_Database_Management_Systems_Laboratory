@@ -1,0 +1,14 @@
+ first_name | last_name |  household_income  
+------------+-----------+--------------------
+ Girl18     | Family9   | 34674.365201126915
+ Girl19     | Family9   | 34674.365201126915
+ Girl22     | Family11  |  37563.64399575844
+ Girl23     | Family11  |  37563.64399575844
+ Girl28     | Family14  |  44914.32119588705
+ Girl29     | Family14  |  44914.32119588705
+ Girl24     | Family12  | 54069.354150535284
+ Girl25     | Family12  | 54069.354150535284
+ Girl4      | Family2   |  66099.87644601685
+ Girl5      | Family2   |  66099.87644601685
+(10 rows)
+

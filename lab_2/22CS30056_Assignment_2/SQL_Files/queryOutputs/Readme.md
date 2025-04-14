@@ -1,0 +1,1 @@
+# All the Query Outputs are stored in this folder

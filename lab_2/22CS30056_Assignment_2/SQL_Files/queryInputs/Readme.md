@@ -1,0 +1,1 @@
+# This folder contains the input SQL Queries

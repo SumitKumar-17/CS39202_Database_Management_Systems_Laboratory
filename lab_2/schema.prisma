@@ -1,0 +1,141 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" 
+  url      = env("DATABASE_URL)
+}
+
+model Citizen {
+  citizen_id        Int                 @id @default(autoincrement())
+  aadhar_no         String              @unique
+  first_name        String
+  last_name         String
+  dob               DateTime
+  gender            String
+  phone             String
+  email             String
+  address           String
+  occupation        String
+  registration_date DateTime
+  taxRecords        TaxRecord[]
+  certificates      Certificate[]
+  household         Household?
+  panchayatMember   PanchayatMember?
+  schemeBeneficiaries SchemeBeneficiary[]
+}
+
+model Household {
+  household_id     Int       @id @default(autoincrement())
+  head_citizen_id  Int       @unique
+  house_no         String
+  category         String
+  total_members    Int
+  last_census_date DateTime
+  head             Citizen   @relation(fields: [head_citizen_id], references: [citizen_id])
+}
+
+model TaxRecord {
+  tax_id          Int       @id @default(autoincrement())
+  citizen_id      Int
+  tax_type        String
+  amount          Float
+  due_date        DateTime
+  paid_date       DateTime?
+  payment_status  String
+  financial_year  String
+  citizen         Citizen   @relation(fields: [citizen_id], references: [citizen_id])
+}
+
+model Certificate {
+  certificate_id  Int       @id @default(autoincrement())
+  citizen_id      Int
+  certificate_type String
+  issue_date      DateTime
+  valid_until     DateTime
+  status          String
+  issued_by       String
+  citizen         Citizen   @relation(fields: [citizen_id], references: [citizen_id])
+}
+
+model PanchayatMember {
+  member_id       Int       @id @default(autoincrement())
+  citizen_id      Int       @unique
+  role            String
+  term_start      DateTime
+  term_end        DateTime
+  status          String
+  committee_name  String
+  citizen         Citizen   @relation(fields: [citizen_id], references: [citizen_id])
+}
+
+model Income {
+  income_id       Int       @id @default(autoincrement())
+  source          String
+  amount          Float
+  receipt_date    DateTime
+  financial_year  String
+  description     String
+}
+
+model Expenditure {
+  expenditure_id  Int       @id @default(autoincrement())
+  category        String
+  amount          Float
+  expense_date    DateTime
+  purpose         String
+  approved_by     String
+  payment_mode    String
+}
+
+model Asset {
+  asset_id        Int       @id @default(autoincrement())
+  asset_type      String
+  name            String
+  acquisition_date DateTime
+  value           Float
+  status          String
+  location        String
+}
+
+model AgricultureData {
+  record_id       Int       @id @default(autoincrement())
+  crop_type       String
+  area_hectares   Float
+  season          String
+  year            Int
+  estimated_yield Float
+  soil_type       String
+}
+
+model EnvironmentalData {
+  record_id             Int       @id @default(autoincrement())
+  recorded_date         DateTime
+  rainfall_mm           Float
+  groundwater_level     Float
+  waste_collection_status String
+  trees_planted         Int
+}
+
+model WelfareScheme {
+  scheme_id       Int                  @id @default(autoincrement())
+  scheme_name     String
+  description     String
+  start_date      DateTime
+  end_date        DateTime
+  budget_allocated Float
+  status          String
+  beneficiaries   SchemeBeneficiary[]
+}
+
+model SchemeBeneficiary {
+  beneficiary_id  Int       @id @default(autoincrement())
+  scheme_id       Int
+  citizen_id      Int
+  enrollment_date DateTime
+  status          String
+  benefit_amount  Float
+  scheme          WelfareScheme @relation(fields: [scheme_id], references: [scheme_id])
+  citizen         Citizen       @relation(fields: [citizen_id], references: [citizen_id])
+}

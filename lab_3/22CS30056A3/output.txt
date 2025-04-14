@@ -1,0 +1,2 @@
+java -cp ./JavaOutput:lib/postgresql-42.7.5.jar CS30056A3
+Enter the query number (1-10) to execute: 
